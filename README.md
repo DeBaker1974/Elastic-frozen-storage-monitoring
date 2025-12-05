@@ -16,8 +16,8 @@ It utilizes an **Elasticsearch Transform** to aggregate historical storage data 
 
 Before deploying this dashboard, ensure the following requirements are met:
 
-1.  **Elastic Stack Version**: 9.x
-2.  **Stack Monitoring**: You must have **Elastic Stack Monitoring** enabled and collecting data. The dashboard relies on the internal monitoring indices (specifically `.ds-.monitoring-es-8-mb-*`).
+1.  **Elastic Stack Version**: 8.x, 9.x
+2.  **Stack Monitoring**: You must have **Elastic Stack Monitoring** enabled and collecting data. The dashboard relies on the internal monitoring indices (specifically `.ds-.monitoring-es-8-mb-*`, `.ds-.monitoring-es-9-mb-*` ).
 3.  **Permissions**: The user deploying this must have permissions to:
     *   Create and start Transforms (`manage_transform`).
     *   Import Saved Objects in Kibana.
