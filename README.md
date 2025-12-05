@@ -10,6 +10,8 @@ This project provides a comprehensive monitoring solution for Elasticsearch 9.x 
 
 It utilizes an **Elasticsearch Transform** to aggregate historical storage data and a **Kibana Dashboard** powered by ES|QL to visualize the results.
 
+![Dashboard](Images/dashboard.png)
+
 ## Prerequisites
 
 Before deploying this dashboard, ensure the following requirements are met:
