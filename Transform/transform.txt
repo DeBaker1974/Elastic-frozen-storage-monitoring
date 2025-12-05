@@ -2,7 +2,8 @@ PUT _transform/storage-metrics-frozen-tier
 {
   "source": {
     "index": [
-      ".ds-.monitoring-es-8-mb-*"
+      ".ds-.monitoring-es-8-mb-*",
+      ".ds-.monitoring-es-9-mb-*" 
     ],
     "query": {
       "bool": {
