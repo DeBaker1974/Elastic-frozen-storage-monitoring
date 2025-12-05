@@ -1,0 +1,82 @@
+PUT _transform/storage-metrics-frozen-tier
+{
+  "source": {
+    "index": [
+      ".ds-.monitoring-es-8-mb-*"
+    ],
+    "query": {
+      "bool": {
+        "must": [
+          {
+            "term": {
+              "event.dataset": "elasticsearch.index"
+            }
+          },
+          {
+            "wildcard": {
+              "elasticsearch.index.name": "partial-*"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "dest": {
+    "index": "storage-metrics-frozen-tier"
+  },
+  "frequency": "1h",
+  "sync": {
+    "time": {
+      "field": "@timestamp",
+      "delay": "60s"
+    }
+  },
+  "pivot": {
+    "group_by": {
+      "timestamp": {
+        "date_histogram": {
+          "field": "@timestamp",
+          "fixed_interval": "1h"
+        }
+      },
+      "index_name": {
+        "terms": {
+          "field": "elasticsearch.index.name"
+        }
+      }
+    },
+    "aggregations": {
+      "total_store_bytes": {
+        "max": {
+          "field": "elasticsearch.index.total.store.size_in_bytes"
+        }
+      },
+      "total_data_set_size_bytes": {
+        "max": {
+          "field": "elasticsearch.index.total.store.total_data_set_size_in_bytes"
+        }
+      },
+      "primary_docs_count": {
+        "sum": {
+          "field": "elasticsearch.index.primaries.docs.count"
+        }
+      },
+      "total_docs_count": {
+        "sum": {
+          "field": "elasticsearch.index.total.docs.count"
+        }
+      },
+      "indices_count": {
+        "cardinality": {
+          "field": "elasticsearch.index.name"
+        }
+      },
+      "segments_count": {
+        "avg": {
+          "field": "elasticsearch.index.total.segments.count"
+        }
+      }
+    }
+  },
+  "description": "Tracks frozen tier searchable snapshots blob storage using index data"
+}
