@@ -1,8 +1,3 @@
-## 🤖 Assistant
-
-Here is the `README.md` file tailored to your specific requirements and the attached files.
-
-***
 
 # Frozen Storage & Ingest Metrics Dashboard
 
